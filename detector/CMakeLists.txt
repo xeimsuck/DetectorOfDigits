@@ -1,5 +1,7 @@
 # detector
-add_executable(detector sources/main.cpp)
+add_executable(detector sources/main.cpp
+        sources/core/window.cpp
+        sources/core/window.hpp)
 
 # QT6
 ## link
