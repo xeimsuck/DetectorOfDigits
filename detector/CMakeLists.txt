@@ -10,6 +10,8 @@ add_executable(detector sources/main.cpp
         sources/gui/resultWidget.hpp
         sources/gui/drawWidget.cpp
         sources/gui/drawWidget.hpp)
+set_target_properties(detector PROPERTIES AUTOMOC TRUE)
+
 target_include_directories(detector PRIVATE sources)
 
 # QT6
