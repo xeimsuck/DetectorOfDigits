@@ -44,4 +44,7 @@ dod::core::window::window(){
         allResultsLabels[i] = make_unique<gui::resultWidget>(QString::number(i));
         allResultsLayout->addWidget(allResultsLabels[i].get());
     }
+
+    /*=============== Neural Network ===============*/
+    neuralNet = make_unique<neuralNetwork>(DRAW_WIDGET_WIDTH*DRAW_WIDGET_HEIGHT, 100, 10);
 }

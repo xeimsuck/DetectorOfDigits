@@ -6,7 +6,7 @@
 #include <QGroupBox>
 #include "gui/drawWidget.hpp"
 #include "gui/resultWidget.hpp"
-#include "neuralNetwork.hpp"
+#include "core/neuralNetwork.hpp"
 
 inline constexpr char WINDOW_TITLE[] = "Detector Of Digits";
 inline constexpr unsigned WINDOW_WIDTH = 600;
@@ -37,6 +37,9 @@ namespace dod::core {
 
         std::unique_ptr<gui::resultWidget> allResultsLabels[10];
         std::unique_ptr<QHBoxLayout> allResultsLayout = nullptr;
+
+        // Neural Network
+        std::unique_ptr<neuralNetwork> neuralNet;
     };
 }
 
