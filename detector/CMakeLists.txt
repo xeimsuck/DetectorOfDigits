@@ -2,6 +2,8 @@
 add_executable(detector sources/main.cpp
         sources/core/window.cpp
         sources/core/window.hpp
+        sources/core/neuralNetwork.cpp
+        sources/core/neuralNetwork.hpp
         sources/math/rectifier.cpp
         sources/math/rectifier.hpp)
 target_include_directories(detector PRIVATE sources)
