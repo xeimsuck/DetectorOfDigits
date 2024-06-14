@@ -5,7 +5,9 @@ add_executable(detector sources/main.cpp
         sources/core/neuralNetwork.cpp
         sources/core/neuralNetwork.hpp
         sources/math/rectifier.cpp
-        sources/math/rectifier.hpp)
+        sources/math/rectifier.hpp
+        sources/gui/resultWidget.cpp
+        sources/gui/resultWidget.hpp)
 target_include_directories(detector PRIVATE sources)
 
 # QT6
