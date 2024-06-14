@@ -21,6 +21,7 @@ dod::core::window::window(){
 
     QSize q_sizeInputField(DRAW_WIDGET_WIDTH, DRAW_WIDGET_HEIGHT);
     inputField = std::make_unique<gui::drawWidget>(q_sizeInputField , this);
+    QObject::connect(inputField.get(), &gui::drawWidget::changed, this, &window::updateResults);
     inputGroupLayout->addWidget(inputField.get());
 
     clearButton = make_unique<QPushButton>("Clear");
@@ -47,4 +48,14 @@ dod::core::window::window(){
 
     /*=============== Neural Network ===============*/
     neuralNet = make_unique<neuralNetwork>(DRAW_WIDGET_WIDTH*DRAW_WIDGET_HEIGHT, 100, 10);
+}
+
+void dod::core::window::updateResults() {
+    decltype(auto) v = neuralNet->getOutputNeurons();
+    int winner = 0;
+    for(int i = 0; i < v.size(); ++i){
+        if(v[i]>v[winner]) winner = i;
+        allResultsLabels[i]->setProgressValue(static_cast<int>(v[i]*100));
+    }
+    finalResultLabel->setText(QString::number(winner));
 }

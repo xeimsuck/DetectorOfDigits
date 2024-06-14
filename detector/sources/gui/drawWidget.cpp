@@ -21,8 +21,10 @@ void dod::gui::drawWidget::clear() {
 }
 
 void dod::gui::drawWidget::mousePressEvent(QMouseEvent* event) {
-    if(!v_plPoints.back().empty())v_plPoints.emplace_back();
+   v_plPoints.emplace_back();
 }
+
 void dod::gui::drawWidget::mouseMoveEvent(QMouseEvent* event) {
     addPoint(event->pos());
+    changed();
 }

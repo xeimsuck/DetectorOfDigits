@@ -19,6 +19,10 @@ namespace dod::core {
     class window final : public QMainWindow {
     public:
         window();
+
+    public slots:
+        void updateResults();
+
     private:
         // Window Stuff
         std::unique_ptr<QWidget> centralWidget = nullptr;
