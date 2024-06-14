@@ -1,7 +1,9 @@
 # detector
 add_executable(detector sources/main.cpp
         sources/core/window.cpp
-        sources/core/window.hpp)
+        sources/core/window.hpp
+        sources/math/rectifier.cpp
+        sources/math/rectifier.hpp)
 
 # QT6
 ## link
