@@ -19,6 +19,8 @@ namespace dod::gui {
         void addPoint(QPoint point);
         void mousePressEvent(QMouseEvent*) final;
         void mouseMoveEvent(QMouseEvent*) final;
+
+    public slots:
         void clear();
 
     private:
