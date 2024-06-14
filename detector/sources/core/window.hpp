@@ -8,7 +8,7 @@ inline constexpr unsigned WIDTH = 600;
 inline constexpr unsigned HEIGHT = 800;
 
 namespace dod::core {
-    class window : public QMainWindow {
+    class window final : public QMainWindow {
     public:
         window();
     };
