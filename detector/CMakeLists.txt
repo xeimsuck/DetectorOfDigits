@@ -4,6 +4,7 @@ add_executable(detector sources/main.cpp
         sources/core/window.hpp
         sources/math/rectifier.cpp
         sources/math/rectifier.hpp)
+target_include_directories(detector PRIVATE sources)
 
 # QT6
 ## link
