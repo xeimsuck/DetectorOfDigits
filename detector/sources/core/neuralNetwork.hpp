@@ -15,7 +15,7 @@ namespace dod::core {
         std::vector<double> use(const std::vector<double>&input);
         void learn(const std::vector<double>&waited);
 
-        std::vector<double>& getOutputNeurons();
+        const std::vector<double>& getOutputNeurons();
     private:
         void feedForward(const std::vector<double>&inputNeurons);
 

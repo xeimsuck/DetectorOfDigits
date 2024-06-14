@@ -49,6 +49,6 @@ void dod::core::neuralNetwork::learn(const std::vector<double> &waited) {
     if(waited.size() != neuronsOutput.size()) return;
 }
 
-std::vector<double>& dod::core::neuralNetwork::getOutputNeurons() {
+const std::vector<double>& dod::core::neuralNetwork::getOutputNeurons() {
     return neuronsOutput;
 }
