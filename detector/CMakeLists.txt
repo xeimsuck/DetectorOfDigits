@@ -7,7 +7,9 @@ add_executable(detector sources/main.cpp
         sources/math/rectifier.cpp
         sources/math/rectifier.hpp
         sources/gui/resultWidget.cpp
-        sources/gui/resultWidget.hpp)
+        sources/gui/resultWidget.hpp
+        sources/gui/drawWidget.cpp
+        sources/gui/drawWidget.hpp)
 target_include_directories(detector PRIVATE sources)
 
 # QT6
