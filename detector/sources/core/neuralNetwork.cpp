@@ -5,10 +5,11 @@
 dod::core::neuralNetwork::neuralNetwork(const int inputCount, const int hiddenCount, const int outputCount) :
         neuronsInputCount(inputCount),
         neuronsHidden(hiddenCount,0), neuronsOutput(outputCount, 0),
-        biasesHidden(hiddenCount, (randomGenerator.generate() * 2 - 1) * 0.005),
-        biasesOutput(outputCount, (randomGenerator.generate() * 2 - 1) * 0.005),
-        weightsInputHidden(inputCount, std::vector<double>(hiddenCount, (randomGenerator.generate() * 2 - 1) * 0.005)),
-        weightHiddenOutput(hiddenCount, std::vector<double>(outputCount, (randomGenerator.generate() * 2 - 1) * 0.005)){
+        biasesHidden(hiddenCount),
+        biasesOutput(outputCount),
+        weightsInputHidden(inputCount, std::vector<double>(hiddenCount)),
+        weightsHiddenOutput(hiddenCount, std::vector<double>(outputCount)){
+    reset();
 }
 
 size_t dod::core::neuralNetwork::getInputNeuronsCount() const {
@@ -21,24 +22,34 @@ size_t dod::core::neuralNetwork::getOutputNeuronsCount() const {
     return neuronsOutput.size();
 }
 
-std::vector<double> dod::core::neuralNetwork::use(const std::vector<double>&inputNeurons) {
-    if(inputNeurons.size() != neuronsInputCount) throw;
-    feedForward(inputNeurons);
+void dod::core::neuralNetwork::reset() {
+    for(auto& i : biasesHidden)
+        i = (randomGenerator.generateDouble() * 2 - 1) * 0.01;
+    for(auto& i : biasesOutput)
+        i = (randomGenerator.generateDouble() * 2 - 1) * 0.01;
+    for(auto& i : weightsInputHidden)
+        for(auto& j : i) j = (randomGenerator.generateDouble() * 2 - 1) * 0.01;
+    for(auto& i : weightsHiddenOutput)
+        for(auto& j : i) j = (randomGenerator.generateDouble() * 2 - 1) * 0.01;
+}
+
+const std::vector<double>& dod::core::neuralNetwork::use(const uchar input[]) {
+    feedForward(input);
     return neuronsOutput;
 }
 
-void dod::core::neuralNetwork::feedForward(const std::vector<double>&inputNeurons) {
+void dod::core::neuralNetwork::feedForward(const uchar input[]) {
     for(size_t i = 0; i < neuronsHidden.size(); ++i){
         double result = biasesHidden[i];
-        for (size_t j = 0; j < inputNeurons.size(); ++j) {
-            result+= inputNeurons[j] * weightsInputHidden[j][i];
+        for (size_t j = 0; j < neuronsInputCount; ++j) {
+            result+= (input[j]?1:0) * weightsInputHidden[j][i];
         }
         neuronsHidden[i]= math::rectifier(result);
     }
     for(size_t i = 0; i < neuronsOutput.size(); ++i){
         double result = biasesOutput[i];
         for (size_t j = 0; j < neuronsHidden.size(); ++j) {
-            result+= neuronsHidden[j] * weightHiddenOutput[j][i];
+            result+= neuronsHidden[j] * weightsHiddenOutput[j][i];
         }
         neuronsOutput[i]= math::rectifier(result);
     }

@@ -2,6 +2,7 @@
 #define DOD_NEURALNETWORK
 
 #include <cstddef>
+#include <QDebug>
 #include <QRandomGenerator>
 
 namespace dod::core {
@@ -12,12 +13,13 @@ namespace dod::core {
         [[nodiscard]]size_t getHiddenNeuronsCount() const;
         [[nodiscard]]size_t getOutputNeuronsCount() const;
 
-        std::vector<double> use(const std::vector<double>&input);
+        void reset();
+        const std::vector<double>& use(const uchar input[]);
         void learn(const std::vector<double>&waited);
 
         const std::vector<double>& getOutputNeurons();
     private:
-        void feedForward(const std::vector<double>&inputNeurons);
+        void feedForward(const uchar input[]);
 
         QRandomGenerator randomGenerator;
 
@@ -25,7 +27,7 @@ namespace dod::core {
 
         std::vector<double> neuronsHidden, neuronsOutput;
         std::vector<double> biasesHidden, biasesOutput;
-        std::vector<std::vector<double>> weightsInputHidden, weightHiddenOutput;
+        std::vector<std::vector<double>> weightsInputHidden, weightsHiddenOutput;
     };
 }
 
