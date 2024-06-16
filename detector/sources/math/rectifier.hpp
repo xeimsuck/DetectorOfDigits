@@ -3,6 +3,7 @@
 
 namespace dod::math {
     double rectifier(double x);
+    double rectifierDerivative(double x);
 }
 
 #endif //DOD_RECTIFIER
