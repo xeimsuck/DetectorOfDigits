@@ -15,7 +15,7 @@ namespace dod::core {
 
         void reset();
         const std::vector<double>& use(const uchar input[]);
-        void learn(const std::vector<double>&waited);
+        void feedBackward(const std::vector<double>&waited);
 
         const std::vector<double>& getOutputNeurons();
     private:

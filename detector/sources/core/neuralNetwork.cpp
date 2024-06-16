@@ -42,7 +42,7 @@ void dod::core::neuralNetwork::feedForward(const uchar input[]) {
     for(size_t i = 0; i < neuronsHidden.size(); ++i){
         double result = biasesHidden[i];
         for (size_t j = 0; j < neuronsInputCount; ++j) {
-            result+= (input[j]?1:0) * weightsInputHidden[j][i];
+            result+= static_cast<double>(input[j])/255 * weightsInputHidden[j][i];
         }
         neuronsHidden[i]= math::rectifier(result);
     }
@@ -56,7 +56,7 @@ void dod::core::neuralNetwork::feedForward(const uchar input[]) {
 }
 
 // TODO: learn dont work
-void dod::core::neuralNetwork::learn(const std::vector<double> &waited) {
+void dod::core::neuralNetwork::feedBackward(const std::vector<double> &waited) {
     if(waited.size() != neuronsOutput.size()) return;
 }
 
