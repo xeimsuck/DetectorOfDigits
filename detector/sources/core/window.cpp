@@ -26,6 +26,7 @@ dod::core::window::window(){
 
     clearButton = make_unique<QPushButton>("Clear");
     QObject::connect(clearButton.get(), &QPushButton::clicked, inputField.get(), &gui::drawWidget::clear);
+    QObject::connect(clearButton.get(), &QPushButton::clicked, this, &core::window::clear);
     inputGroupLayout->addWidget(clearButton.get());
 
     /*=============== OUTPUT GROUP ===============*/
@@ -48,6 +49,13 @@ dod::core::window::window(){
 
     /*=============== Neural Network ===============*/
     neuralNet = make_unique<neuralNetwork>(DRAW_WIDGET_WIDTH*DRAW_WIDGET_HEIGHT, 100, 10);
+}
+
+void dod::core::window::clear() {
+    finalResultLabel->setText("-");
+    for(int i = 0; i < 10; ++i){
+        allResultsLabels[i]->setProgressValue(0);
+    }
 }
 
 void dod::core::window::updateResults() {

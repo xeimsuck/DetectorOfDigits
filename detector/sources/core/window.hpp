@@ -22,6 +22,7 @@ namespace dod::core {
 
     public slots:
         void updateResults();
+        void clear();
 
     private:
         // Window Stuff
